@@ -1,0 +1,21 @@
+.squareWhite, .squareBlack {
+    border: 1px solid #999;
+    float: left;
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 10px;
+    height: 10px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 10px;
+}
+
+.squareWhite {
+    background: white;
+}
+
+.squareBlack {
+    background: black;
+}
