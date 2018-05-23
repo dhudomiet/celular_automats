@@ -5,7 +5,7 @@ export default class Square extends Component {
 
     render() {
         return (
-            <button className={this.props.value === 0 ? 'squareWhite' : 'squareBlack'} >
+            <button className={this.props.value === 0 ? 'squareWhite' : 'squareBlack'} onClick={() => this.props.onClick(this.props.row, this.props.col, this.props.value)} >
 
             </button>
         );
