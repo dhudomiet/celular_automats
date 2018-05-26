@@ -11,7 +11,7 @@ export default class Main extends Component {
                     <Route path='/rule30' render={() => <Rules length={50} stateZero={['111', '110', '101', '000']}/>}/>
                     <Route path='/rule60' render={() => <Rules length={50} stateZero={['111', '110', '001', '000']}/>}/>
                     <Route path='/rule90' render={() => <Rules length={50} stateZero={['111', '101', '010', '000']}/>}/>
-                    <Route path='/gameOfLife' render={() => <GameOfLife length={10} />}/>
+                    <Route path='/gameOfLife' render={() => <GameOfLife length={50} />}/>
                 </div>
             </div>
         );
