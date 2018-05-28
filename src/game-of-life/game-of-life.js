@@ -16,16 +16,22 @@ export default class GameOfLife extends Component {
     render() {
         return (
             <div>
-                <ReactInterval timeout={100} enabled={this.state.start} callback={() => this.setState({grid: this.gameOfLifeApi.calculate()})} />
+                <ReactInterval timeout={100} enabled={this.state.start} callback={this.updateGrid} />
                 <div>
                     <button className='btn btn-sm btn-success' onClick={this.startInterval} >start</button>
                     <button className='btn btn-sm btn-success' onClick={this.stopInterval} >stop</button>
                     <button className='btn btn-sm btn-success' onClick={this.clear}>clear</button>
                 </div>
-                <Grid grid={this.state.grid} onClick={(i, j, value) => this.setCell(i, j, value)} />
+                <Grid grid={this.state.grid} onClick={this.setCell} />
             </div>
         )
     }
+
+    updateGrid = () => {
+        this.setState({
+            grid: this.gameOfLifeApi.calculate()
+        })
+    };
 
     stopInterval = () => {
         this.setState({
@@ -52,7 +58,6 @@ export default class GameOfLife extends Component {
         this.setState({
             grid: this.gameOfLifeApi.grid
         })
-    }
-
+    };
 
 }
