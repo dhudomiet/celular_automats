@@ -1,4 +1,4 @@
-export default class Rule {
+export default class RuleApi {
 
     constructor(length, stateZero) {
         this.rowLength = length;
