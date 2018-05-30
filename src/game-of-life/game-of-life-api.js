@@ -12,9 +12,9 @@ export default class GameOfLifeApi {
         }
     }
 
-    setCellState(i, j, state) {
+    setCellState = (i, j, state) => {
         this.grid[i][j] = state;
-    }
+    };
 
     calculate() {
         let grid = this.copyGrid();
