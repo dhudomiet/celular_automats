@@ -1,36 +1,40 @@
 import React, {Component} from 'react';
-import GameOfLifeApi from "./game-of-life-api";
 import Grid from "../grid";
 import ReactInterval from 'react-interval';
+import {connect} from 'react-redux'
+import {clearGrid, setCell, updateGrid} from './game-of-life-redux';
 
-export default class GameOfLife extends Component {
+const getState = (state) => {
+    return {
+        grid: state.gridReducer.grid
+    }
+};
+
+class GameOfLife extends Component {
     constructor(props) {
         super(props);
-        this.gameOfLifeApi = new GameOfLifeApi(this.props.length);
         this.state = {
-            grid: this.gameOfLifeApi.grid,
             start: false
         };
     }
 
     render() {
+        const {grid} = this.props;
         return (
             <div>
-                <ReactInterval timeout={100} enabled={this.state.start} callback={this.updateGrid} />
+                <ReactInterval timeout={100} enabled={this.state.start} callback={this.updateGrid}/>
                 <div>
-                    <button className='btn btn-sm btn-success' onClick={this.startInterval} >start</button>
-                    <button className='btn btn-sm btn-success' onClick={this.stopInterval} >stop</button>
+                    <button className='btn btn-sm btn-success' onClick={this.startInterval}>start</button>
+                    <button className='btn btn-sm btn-success' onClick={this.stopInterval}>stop</button>
                     <button className='btn btn-sm btn-success' onClick={this.clear}>clear</button>
                 </div>
-                <Grid grid={this.state.grid} onClick={this.setCell} />
+                <Grid grid={grid} onClick={this.setCell}/>
             </div>
         )
     }
 
     updateGrid = () => {
-        this.setState({
-            grid: this.gameOfLifeApi.calculate()
-        })
+        this.props.updateGrid();
     };
 
     stopInterval = () => {
@@ -46,18 +50,14 @@ export default class GameOfLife extends Component {
     };
 
     clear = () => {
-        this.gameOfLifeApi.initialize();
-        this.setState({
-            grid: this.gameOfLifeApi.grid
-        })
+        this.props.clearGrid();
     };
 
     setCell = (i, j, value) => {
         value = value === 0 ? 1 : 0;
-        this.gameOfLifeApi.setCellState(i,j,value);
-        this.setState({
-            grid: this.gameOfLifeApi.grid
-        })
+        this.props.setCell(i, j, value);
     };
 
 }
+
+export default connect(getState, {updateGrid, clearGrid, setCell})(GameOfLife)
